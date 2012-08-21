@@ -16,7 +16,7 @@ dofile(minetest.get_modpath("chess").."/pieces.lua")
 dofile(minetest.get_modpath("chess").."/rules.lua")
 
 -- Register the spawn block
-minetest.register_node(":chess:spawn",{
+minetest.register_node("chess:spawn",{
     description = "Chess Board",
     tile_images = {"chess_spawn.png"},
     inventory_image = "chess_spawn.png",
@@ -87,7 +87,7 @@ minetest.register_craft({
 })
 
 --Register the Board Blocks: white
-minetest.register_node(":chess:board_white",{
+minetest.register_node("chess:board_white",{
     description = "White Chess Board Piece",
     tile_images = {"chess_board_white.png"},
     inventory_image = "chess_white.png",
@@ -95,7 +95,7 @@ minetest.register_node(":chess:board_white",{
 })
 
 --Register the Board Blocks: black
-minetest.register_node(":chess:board_black",{
+minetest.register_node("chess:board_black",{
     description = "Black Chess Board Piece",
     tile_images = {"chess_board_black.png"},
     inventory_image = "chess_black.png",
