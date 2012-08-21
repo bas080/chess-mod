@@ -1,4 +1,13 @@
---This file declares all the pieces for the game
+-- CHESS MOD
+-- ======================================
+-- chess/pieces.lua
+-- ======================================
+-- Registers the chess pieces
+--
+-- Contents:
+--
+-- [loop] registers pieces
+-- ======================================
 
 local colors = {"black", "white",}
 
