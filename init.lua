@@ -21,22 +21,46 @@ minetest.register_node(":chess:spawn",{
     tile_images = {"chess_spawn.png"},
     inventory_image = "chess_spawn.png",
 	groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+    after_dig_node = function(pos, node, digger)
+    
+        local size = 10
+        
+        for i = size, 1, -1 do
+            for ii = size, 1, -1 do
+                local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
+                minetest.env:remove_node(p)
+            end
+        end
+    
+    end,
+    on_punch = function(pos)
+        
+        --reset the pieces
+        
+    end,
     after_place_node = function(pos)
         
-        local size = 8
+        local size = 10
         local alternate = true
         
         for i = size, 1, -1 do
             for ii = size, 1, -1 do
-            
-                local p = {x=pos.x+i+1, y=pos.y, z=pos.z+ii+1}
                 
-                if alternate then
+                
+                local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
+                if (ii == 1) or (ii == 10) or (i ==1) or (i == 10) then--create border
                     minetest.env:add_node(p, {name="chess:board_black"})
-                    alternate = false
                 else
-                    minetest.env:add_node(p, {name="chess:board_white"})
-                    alternate = true
+                
+                    
+                    if alternate then
+                        minetest.env:add_node(p, {name="chess:board_black"})
+                        alternate = false
+                    else
+                        minetest.env:add_node(p, {name="chess:board_white"})
+                        alternate = true
+                    end
+                
                 end
             end
             
