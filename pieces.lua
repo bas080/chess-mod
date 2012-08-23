@@ -1,4 +1,13 @@
---This file declares all the pieces for the game
+-- CHESS MOD
+-- ======================================
+-- chess/pieces.lua
+-- ======================================
+-- Registers the chess pieces
+--
+-- Contents:
+--
+-- [loop] registers pieces
+-- ======================================
 
 local colors = {"black", "white",}
 
@@ -6,7 +15,7 @@ local colors = {"black", "white",}
 
 for color = 1, 2 do
     --Pawn
-    minetest.register_node(":chess:pawn_"..colors[color],
+    minetest.register_node("chess:pawn_"..colors[color],
     {
         description = 'pawn',
         groups = {snappy = 2},
@@ -41,7 +50,7 @@ for color = 1, 2 do
 
     --Bishop
     
-    minetest.register_node(":chess:bishop_"..colors[color],
+    minetest.register_node("chess:bishop_"..colors[color],
     {
         description = 'bishop',
         groups = {snappy = 2},
