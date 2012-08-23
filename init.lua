@@ -22,16 +22,20 @@ minetest.register_node(":chess:spawn",{
     inventory_image = "chess_spawn.png",
 	groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
     after_dig_node = function(pos, node, digger)
-    
+        
         local size = 10
         
-        for i = size, 1, -1 do
-            for ii = size, 1, -1 do
-                local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
-                minetest.env:remove_node(p)
+        local p = {x=pos.x+1, y=pos.y, z=pos.z+1}
+        local n = minetest.env:get_node(p)
+        
+        if n.name == "chess:board_black" then 
+            for i = size, 1, -1 do
+                for ii = size, 1, -1 do
+                    local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
+                    minetest.env:remove_node(p)
+                end
             end
         end
-    
     end,
     on_punch = function(pos)
         
@@ -41,37 +45,57 @@ minetest.register_node(":chess:spawn",{
     after_place_node = function(pos)
         
         local size = 10
-        local alternate = true
-        
+        local isFree = true
+        --check if there is room for a chessboard with pieces ontop
         for i = size, 1, -1 do
             for ii = size, 1, -1 do
                 
-                
                 local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
-                if (ii == 1) or (ii == 10) or (i ==1) or (i == 10) then--create border
-                    minetest.env:add_node(p, {name="chess:board_black"})
-                else
+                local n = minetest.env:get_node(p)
+
+                local p_top = {x=pos.x+i, y=pos.y+1, z=pos.z+ii}
+                local n_top = minetest.env:get_node(p_top)
                 
+                if n.name ~= "air" and n_top.name ~= "air" then 
+                    isFree = false
+                    break
+                end
+                
+            end
+        end
+        
+        local alternate = true
+        
+        if isFree then -- if there is room for a chessboard make the chessboard with pieces
+            minetest.chat_send_all("Chess board has been placed, let the match begin!")
+            for i = size, 1, -1 do
+                for ii = size, 1, -1 do
                     
-                    if alternate then
+                    local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
+                    
+                    if (ii == 1) or (ii == size) or (i ==1) or (i == size) then--create border
                         minetest.env:add_node(p, {name="chess:board_black"})
+                    else
+                        if alternate then
+                            minetest.env:add_node(p, {name="chess:board_black"})
+                            alternate = false
+                        else
+                            minetest.env:add_node(p, {name="chess:board_white"})
+                            alternate = true
+                        end
+                    end
+                end
+                
+                if (math.floor(size/2) == size/2) then
+                    if alternate then
                         alternate = false
                     else
-                        minetest.env:add_node(p, {name="chess:board_white"})
                         alternate = true
                     end
-                
                 end
             end
-            
-            if (math.floor(size/2) == size/2) then
-                if alternate then
-                    alternate = false
-                else
-                    alternate = true
-                end
-            end
-            
+        else
+            minetest.chat_send_all("Chess board does not fit")
         end
 	end,
 })
