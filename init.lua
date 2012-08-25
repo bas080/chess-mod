@@ -115,7 +115,7 @@ minetest.register_node("chess:board_white",{
     description = "White Chess Board Piece",
     tile_images = {"chess_board_white.png"},
     inventory_image = "chess_white.png",
-    groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+    groups = {},
 })
 
 --Register the Board Blocks: black
@@ -123,5 +123,5 @@ minetest.register_node("chess:board_black",{
     description = "Black Chess Board Piece",
     tile_images = {"chess_board_black.png"},
     inventory_image = "chess_black.png",
-    groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+    groups = {},
 })
