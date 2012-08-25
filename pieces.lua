@@ -11,6 +11,8 @@
 
 local colors = {"black", "white",}
 
+local piece_group = {snappy=3}
+
 --make a loop which makes the black and white nodes and crafting recipes
 
 for color = 1, 2 do
@@ -41,7 +43,7 @@ for color = 1, 2 do
         type = "fixed",
         fixed = {-0.3, -0.5, -0.3, 0.3, 0.2, 0.3},
         },
-        groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2}
+        groups = piece_group
     })
 
     --Rook
@@ -80,7 +82,7 @@ for color = 1, 2 do
         type = "fixed",
         fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3},
 		},
-        groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2}
+        groups = piece_group
     })
 
     --Knight
@@ -108,7 +110,7 @@ for color = 1, 2 do
         type = "fixed",
         fixed = {-0.3, -0.5, -0.3, 0.3, 0.2, 0.3},
         },
-        groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2}
+        groups = piece_group
     })
 
     --Queen
