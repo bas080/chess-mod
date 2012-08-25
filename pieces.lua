@@ -17,7 +17,7 @@ for color = 1, 2 do
     --Pawn
     minetest.register_node("chess:pawn_"..colors[color],
     {
-        description = 'pawn',
+        description = 'Pawn',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color]..".png"},
         drawtype = "nodebox",
@@ -28,8 +28,8 @@ for color = 1, 2 do
         node_box = {
         type = "fixed",
         fixed = {
-        {-0.3, -0.5, -0.3, 0.2, -0.4, 0.3},
-        {-0.3, -0.5, -0.3, 0.2, -0.4, 0.3},
+        {-0.2, -0.5, -0.3, 0.2, -0.4, 0.3},
+		{-0.3, -0.5, -0.2, 0.3, -0.4, 0.2},
         {-0.1, -0.4, -0.2, 0.1, -0.3, 0.2},
         {-0.2, -0.4, -0.1, 0.2, -0.3, 0.1},
         {-0.1, -0.3, -0.1, 0.1, 0.2, 0.1},
@@ -47,7 +47,7 @@ for color = 1, 2 do
     --Rook
     minetest.register_node("chess:rook_"..colors[color],
     {
-        description = 'rook',
+        description = 'Rook',
         groups = {snappy = 2},
         tiles = {"chess_piece_"..colors[color]..".png"},
         drawtype = "nodebox",
