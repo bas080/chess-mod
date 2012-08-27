@@ -101,8 +101,8 @@ minetest.register_node("chess:spawn",{
                             if (i == 2 or i == 9) then minetest.env:add_node(p_top, {name="chess:rook_black"}) end
                             if (i == 3 or i == 8) then minetest.env:add_node(p_top, {name="chess:knight_black"}) end
                             if (i == 4 or i == 7) then minetest.env:add_node(p_top, {name="chess:bishop_black"}) end
-                            if (i == 5) then minetest.env:add_node(p_top, {name="chess:queen_black"}) end
-                            if (i == 6) then minetest.env:add_node(p_top, {name="chess:king_black"}) end
+                            if (i == 6) then minetest.env:add_node(p_top, {name="chess:queen_black"}) end
+                            if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_black"}) end
                         end
 
                         --white pieces
