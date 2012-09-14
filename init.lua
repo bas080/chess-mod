@@ -54,7 +54,7 @@ minetest.register_node("chess:spawn",{
         --reset the pieces
         
     end,
-    after_place_node = function(pos, placer)
+    after_place_node = function(pos)
         --place chess board
         
         for i = size, 0, -1 do --check if there is room for a chessboard with pieces ontop
@@ -66,7 +66,8 @@ minetest.register_node("chess:spawn",{
                 local p_top = {x=pos.x+i, y=pos.y+1, z=pos.z+ii}
                 local n_top = minetest.env:get_node(p_top)
                 
-                if n.name ~= "air" and n_top.name ~= "air" then
+                if (n.name ~= "air" and n.name ~= "chess:spawn")
+                    or n_top.name ~= "air" then
                     minetest.chat_send_all("Chess board does not fit")
                     return
                 end
