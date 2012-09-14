@@ -54,7 +54,7 @@ minetest.register_node("chess:spawn",{
         --reset the pieces
         
     end,
-    after_place_node = function(pos)
+    after_place_node = function(pos, placer)
         --place chess board
         
         for i = size, 0, -1 do --check if there is room for a chessboard with pieces ontop
