@@ -106,29 +106,31 @@ minetest.register_node("chess:spawn",{
                         end
                     end
                     --place peaces
+                    local face = 2
                     if (ii == 2) and (i>0) and (i<size) then --pawns
-                        minetest.env:add_node(p_top, {name="chess:pawn_black"})
+                        minetest.env:add_node(p_top, {name="chess:pawn_black", param2 = face})
                     end
                     
                     if (ii == 1) then --behind pawns
-                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_black"}) end
-                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_black"}) end
-                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_black"}) end
-                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_black"}) end
-                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_black"}) end
+                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_black", param2 = face}) end
+                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_black", param2 = face}) end
+                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_black", param2 = face}) end
+                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_black", param2 = face}) end
+                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_black", param2 = face}) end
                     end
 
                     --white pieces
+                    local face = 0
                     if (ii == 7) and (i>0) and (i<size) then --pawns
-                        minetest.env:add_node(p_top, {name="chess:pawn_white"})
+                        minetest.env:add_node(p_top, {name="chess:pawn_white", param2 = face})
                     end
                     
                     if (ii == 8) then --behind pawns
-                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_white"}) end
-                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_white"}) end
-                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_white"}) end
-                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_white"}) end
-                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_white"}) end
+                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_white", param2 = face}) end
+                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_white", param2 = face}) end
+                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_white", param2 = face}) end
+                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_white", param2 = face}) end
+                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_white", param2 = face}) end
                     end
                 end
             end
@@ -150,7 +152,7 @@ minetest.register_craft({
 minetest.register_node("chess:board_white",{
     description = "White Chess Board Piece",
     tile_images = {"chess_board_white.png"},
-    inventory_image = "chess_white.png",
+    inventory_image = "chess_board_white.png",
     groups = {indestructable},
 })
 
@@ -158,14 +160,14 @@ minetest.register_node("chess:board_white",{
 minetest.register_node("chess:board_black",{
     description = "Black Chess Board Piece",
     tile_images = {"chess_board_black.png"},
-    inventory_image = "chess_black.png",
+    inventory_image = "chess_board_black.png",
     groups = {indestructable},
 })
 
 minetest.register_node("chess:border",{
     description = "Black Chess Board Piece",
     tile_images = {"chess_board_black.png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
-    inventory_image = "chess_black.png",
+    inventory_image = "chess_board_black.png",
     groups = {indestructable},
 })
 
@@ -174,7 +176,7 @@ for iii = innerSize, 1, -1 do
     minetest.register_node("chess:border_" .. letters[iii],{
         description = "White Chess Board Piece",
         tile_images = {"chess_board_black.png^chess_border_" .. letters[iii] .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
-        inventory_image = "chess_white.png",
+        inventory_image = "chess_board_white.png",
         groups = {indestructable},
     })
     
@@ -182,7 +184,7 @@ for iii = innerSize, 1, -1 do
     minetest.register_node("chess:border_" .. iii,{
         description = "White Chess Board Piece",
         tile_images = {"chess_board_black.png^chess_border_" .. iii .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
-        inventory_image = "chess_white.png",
+        inventory_image = "chess_board_white.png",
         groups = {indestructable},
     })
 end
