@@ -57,8 +57,6 @@ minetest.register_node("chess:spawn",{
     after_place_node = function(pos, placer)
         --place chess board
         
-        local isFree = true
-        
         for i = size, 0, -1 do --check if there is room for a chessboard with pieces ontop
             for ii = size, 0, -1 do
                 
@@ -68,71 +66,69 @@ minetest.register_node("chess:spawn",{
                 local p_top = {x=pos.x+i, y=pos.y+1, z=pos.z+ii}
                 local n_top = minetest.env:get_node(p_top)
                 
-                if n.name ~= "air" and n_top.name ~= "air" then
-                    isFree = false
+                if (n.name ~= "air" and n.name ~= "chess:spawn")
+                    or n_top.name ~= "air" then
                     minetest.chat_send_all("Chess board does not fit")
-                    break
+                    return
                 end
                 
             end
         end
         
-        if (isFree) then
-            minetest.chat_send_all("Chess board has been placed, let the match begin!")
-            
-            for i = size, 0, -1 do
-                for ii = size, 0, -1 do
-                    --place chessboard
-                    local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
-                    local p_top = {x=pos.x+i, y=pos.y+1, z=pos.z+ii}
+        minetest.chat_send_all("Chess board has been placed, let the match begin!")
+        
+        for i = size, 0, -1 do
+            for ii = size, 0, -1 do
+                --place chessboard
+                local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
+                local p_top = {x=pos.x+i, y=pos.y+1, z=pos.z+ii}
+                
+                if (ii == 0) or (ii == size) or (i ==0) or (i == size) then --if border
                     
-                    if (ii == 0) or (ii == size) or (i ==0) or (i == size) then --if border
-                        
-                        if (ii == 0) and (i < size) and (i > 0) then --letters
-                            minetest.env:add_node(p, {name="chess:border_" .. letters[i]})
-                        end
-                        
-                        if (i == 0) and (ii < size) and (ii > 0) then --letters
-                            minetest.env:add_node(p, {name="chess:border_" .. ii})
-                        end
-                        
-                        if (i == size) or (ii == size) then
-                            minetest.env:add_node(p, {name="chess:border"})
-                        end
-                        
-                        
-                    else--if inside border
-                        if (((ii+i)/2) == math.floor((ii+i)/2)) then
-                            minetest.env:add_node(p, {name="chess:board_black"})
-                        else
-                            minetest.env:add_node(p, {name="chess:board_white"})
-                        end
-                    end
-                    --place peaces
-                    if (ii == 2) and (i>0) and (i<size) then --pawns
-                        minetest.env:add_node(p_top, {name="chess:pawn_black"})
+                    if (ii == 0) and (i < size) and (i > 0) then --letters
+                        minetest.env:add_node(p, {name="chess:border_" .. letters[i]})
                     end
                     
-                    if (ii == 1) then --behind pawns
-                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_black"}) end
-                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_black"}) end
-                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_black"}) end
-                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_black"}) end
-                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_black"}) end
+                    if (i == 0) and (ii < size) and (ii > 0) then --letters
+                        minetest.env:add_node(p, {name="chess:border_" .. ii})
                     end
+                    
+                    if (i == size) or (ii == size) then
+                        minetest.env:add_node(p, {name="chess:border"})
+                    end
+                    
+                    
+                else--if inside border
+                    if (((ii+i)/2) == math.floor((ii+i)/2)) then
+                        minetest.env:add_node(p, {name="chess:board_black"})
+                    else
+                        minetest.env:add_node(p, {name="chess:board_white"})
+                    end
+                end
+                --place peaces
+                if (ii == 2) and (i>0) and (i<size) then --pawns
+                    minetest.env:add_node(p_top, {name="chess:pawn_black"})
+                end
+                
+                if (ii == 1) then --behind pawns
+                    if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_black"}) end
+                    if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_black"}) end
+                    if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_black"}) end
+                    if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_black"}) end
+                    if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_black"}) end
+                end
 
-                    --white pieces
-                    if (ii == 7) and (i>0) and (i<size) then --pawns
-                        minetest.env:add_node(p_top, {name="chess:pawn_white"})
-                    end
-                    
-                    if (ii == 8) then --behind pawns
-                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_white"}) end
-                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_white"}) end
-                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_white"}) end
-                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_white"}) end
-                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_white"}) end
-                    end
+                --white pieces
+                if (ii == 7) and (i>0) and (i<size) then --pawns
+                    minetest.env:add_node(p_top, {name="chess:pawn_white"})
+                end
+                
+                if (ii == 8) then --behind pawns
+                    if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_white"}) end
+                    if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_white"}) end
+                    if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_white"}) end
+                    if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_white"}) end
+                    if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_white"}) end
                 end
             end
         end
