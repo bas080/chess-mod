@@ -23,7 +23,7 @@ local innerSize = 8 --inner width(8) including the coordinate 1,1
 -- Register the spawn block
 minetest.register_node("chess:spawn",{
     description = "Chess Board",
-    tile_images = {"chess_board_black.png^chess_border_spawn.png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
+    tile_images = {"chess_border_spawn.png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
     inventory_image = "chess_spawn.png",
 	  groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
     after_dig_node = function(pos, node, digger)
@@ -56,28 +56,27 @@ minetest.register_node("chess:spawn",{
     end,
     after_place_node = function(pos, placer)
         --place chess board
+        
         local isFree = true
         
-        for i = size, 0, -1 do --check if there is room for a chessboard with pieces ontop
+        for i = size, 0, -1 do
             for ii = size, 0, -1 do
-            
-                local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
-                local n = minetest.env:get_node(p)
-
-                local p_top = {x=pos.x+i, y=pos.y+1, z=pos.z+ii}
-                local n_top = minetest.env:get_node(p_top)
-                
-                if n.name ~= "air" and n_top.name ~= "air" then
-                    isFree = false
-                    break
+                if (isFree) then
+                    
+                    local p = {x=pos.x+i, y=pos.y, z=pos.z+ii}
+                    local p_top = {x=pos.x+i, y=pos.y+1, z=pos.z+ii}
+                    local n = minetest.env:get_node(p)
+                    local n_top = minetest.env:get_node(p_top)
+                    
+                    if (n_top.name ~= "air") and (n.name ~= "air") then
+                        isFree = false
+                    end
                 end
-                
             end
         end
         
-        if (isFree == true) then
-            minetest.chat_send_all("Chess board has been placed, let the match begin!")
-            
+        
+        if (isFree) then
             for i = size, 0, -1 do
                 for ii = size, 0, -1 do
                     --place chessboard
@@ -133,8 +132,6 @@ minetest.register_node("chess:spawn",{
                     end
                 end
             end
-        else
-            minetest.chat_send_all("Chess board does not fit")
         end
     end,
 })
@@ -173,6 +170,7 @@ minetest.register_node("chess:border",{
 })
 
 for iii = innerSize, 1, -1 do
+    print("chess_border_" .. letters[iii] .. ".png")
     minetest.register_node("chess:border_" .. letters[iii],{
         description = "White Chess Board Piece",
         tile_images = {"chess_board_black.png^chess_border_" .. letters[iii] .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
@@ -180,6 +178,7 @@ for iii = innerSize, 1, -1 do
         groups = {indestructable},
     })
     
+    print("chess_border_" .. iii .. ".png")
     minetest.register_node("chess:border_" .. iii,{
         description = "White Chess Board Piece",
         tile_images = {"chess_board_black.png^chess_border_" .. iii .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
@@ -187,3 +186,4 @@ for iii = innerSize, 1, -1 do
         groups = {indestructable},
     })
 end
+
