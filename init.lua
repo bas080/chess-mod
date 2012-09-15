@@ -70,6 +70,7 @@ minetest.register_node("chess:spawn",{
                     
                     if (n_top.name ~= "air") and (n.name ~= "air") then
                         isFree = false
+                        minetest.chat_send_all("Cannot place chess board")
                     end
                 end
             end
@@ -77,6 +78,7 @@ minetest.register_node("chess:spawn",{
         
         
         if (isFree) then
+            minetest.chat_send_all("Chess board has been placed, let the match begin!")
             for i = size, 0, -1 do
                 for ii = size, 0, -1 do
                     --place chessboard
