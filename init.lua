@@ -143,9 +143,9 @@ minetest.register_node("chess:spawn",{
 minetest.register_craft({
     output="chess:spawn",
     recipe = {
-        {'default:mese','default:mese','default:mese'},
-        {'default:mese','default:mese','default:mese'},
-        {'default:mese','default:mese','default:mese'},
+        {'default:wood','default:tree','default:wood'},
+        {'default:tree','default:mese','default:tree'},
+        {'default:wood','default:tree','default:wood'},
     }
 })
 
