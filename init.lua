@@ -61,12 +61,12 @@ minetest.register_node("chess:spawn",{
         for i = size, 0, -1 do
             for ii = size, 0, -1 do
                 for iii = 1, 0, -1 do
-                    if (isFree) then
+		    if (i+ii+iii~=0) then
                         
                         local p = {x=pos.x+i, y=pos.y+iii, z=pos.z+ii}
                         local n = minetest.env:get_node(p)
                         
-                        if(n.name ~= "air" and n.name ~= "chess:spawn") then
+                        if(n.name ~= "air") then
                             isFree = false
                             minetest.chat_send_all("Cannot place chess board")
                         end
