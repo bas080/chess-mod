@@ -24,7 +24,7 @@ local innerSize = 8 --inner width(8) including the coordinate 1,1
 minetest.register_node("chess:spawn",{
     description = "Chess Board",
     tile_images = {"chess_border_spawn.png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
-	  groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+	  groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1},
     after_dig_node = function(pos, node, digger)
         
         local size = 9
