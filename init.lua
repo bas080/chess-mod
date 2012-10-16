@@ -161,7 +161,7 @@ minetest.register_node("chess:board_white",{
     description = "White Chess Board Piece",
     tile_images = {"chess_board_white.png"},
     inventory_image = "chess_board_white.png",
-    groups = {indestructable},
+    groups = {indestructable, not_in_creative_inventory=1},
 })
 
 --Register the Board Blocks: black
@@ -169,14 +169,14 @@ minetest.register_node("chess:board_black",{
     description = "Black Chess Board Piece",
     tile_images = {"chess_board_black.png"},
     inventory_image = "chess_board_black.png",
-    groups = {indestructable},
+    groups = {indestructable, not_in_creative_inventory=1},
 })
 
 minetest.register_node("chess:border",{
     description = "Black Chess Board Piece",
     tile_images = {"chess_board_black.png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
     inventory_image = "chess_board_black.png",
-    groups = {indestructable},
+    groups = {indestructable, not_in_creative_inventory=1},
 })
 
 for iii = innerSize, 1, -1 do
@@ -186,7 +186,7 @@ for iii = innerSize, 1, -1 do
         tile_images = {"chess_board_black.png^chess_border_" .. letters[iii] .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
         inventory_image = "chess_board_white.png",
         paramtype2 = "facedir",
-        groups = {indestructable},
+        groups = {indestructable, not_in_creative_inventory=1},
     })
     
     print("chess_border_" .. iii .. ".png")
@@ -195,7 +195,7 @@ for iii = innerSize, 1, -1 do
         tile_images = {"chess_board_black.png^chess_border_" .. iii .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
         inventory_image = "chess_board_white.png",
         paramtype2 = "facedir",
-        groups = {indestructable},
+        groups = {indestructable, not_in_creative_inventory=1},
     })
 end
 
