@@ -116,29 +116,29 @@ minetest.register_node("chess:spawn",{
                     --place pieces
                     local face = 2
                     if (ii == 2) and (i>0) and (i<size) then --pawns
-                        minetest.env:add_node(p_top, {name="chess:pawn_black", param2 = face})
-                    end
-                    
-                    if (ii == 1) then --behind pawns
-                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_black", param2 = face}) end
-                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_black", param2 = face}) end
-                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_black", param2 = face}) end
-                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_black", param2 = face}) end
-                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_black", param2 = face}) end
-                    end
-
-                    --white pieces
-                    local face = 0
-                    if (ii == 7) and (i>0) and (i<size) then --pawns
                         minetest.env:add_node(p_top, {name="chess:pawn_white", param2 = face})
                     end
                     
-                    if (ii == 8) then --behind pawns
+                    if (ii == 1) then --behind pawns
                         if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_white", param2 = face}) end
                         if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_white", param2 = face}) end
                         if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_white", param2 = face}) end
                         if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_white", param2 = face}) end
                         if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_white", param2 = face}) end
+                    end
+
+                    --black pieces
+                    face = 0
+                    if (ii == 7) and (i>0) and (i<size) then --pawns
+                        minetest.env:add_node(p_top, {name="chess:pawn_black", param2 = face})
+                    end
+                    
+                    if (ii == 8) then --behind pawns
+                        if (i == 1 or i == 8) then minetest.env:add_node(p_top, {name="chess:rook_black", param2 = face}) end
+                        if (i == 2 or i == 7) then minetest.env:add_node(p_top, {name="chess:knight_black", param2 = face}) end
+                        if (i == 3 or i == 6) then minetest.env:add_node(p_top, {name="chess:bishop_black", param2 = face}) end
+                        if (i == 4) then minetest.env:add_node(p_top, {name="chess:queen_black", param2 = face}) end
+                        if (i == 5) then minetest.env:add_node(p_top, {name="chess:king_black", param2 = face}) end
                     end
                 end
             end
