@@ -180,7 +180,6 @@ minetest.register_node("chess:border",{
 })
 
 for iii = innerSize, 1, -1 do
-    print("chess_border_" .. letters[iii] .. ".png")
     minetest.register_node("chess:border_" .. letters[iii],{
         description = "White Chess Board Piece",
         tile_images = {"chess_board_black.png^chess_border_" .. letters[iii] .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
@@ -188,8 +187,7 @@ for iii = innerSize, 1, -1 do
         paramtype2 = "facedir",
         groups = {indestructable, not_in_creative_inventory=1},
     })
-    
-    print("chess_border_" .. iii .. ".png")
+
     minetest.register_node("chess:border_" .. iii,{
         description = "White Chess Board Piece",
         tile_images = {"chess_board_black.png^chess_border_" .. iii .. ".png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
@@ -199,3 +197,4 @@ for iii = innerSize, 1, -1 do
     })
 end
 
+print("[Chess] Loaded!")
