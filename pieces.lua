@@ -8,12 +8,11 @@
 --
 -- [loop] registers pieces
 -- ======================================
-
 dofile(minetest.get_modpath("chess").."/ownership.lua")
 
 local function is_owner(pos, name)
   local owner = minetest.env:get_meta(pos):get_string("owner")
-  if owner == "" or owner == name then
+  if owner == name then
     return true
   end
     return false
@@ -53,6 +52,12 @@ for color = 1, 2 do
     can_dig = function(pos, placer)
       local player = placer:get_player_name()
       return is_owner(pos, player)
+    end,
+    after_place_node = function(pos, placer)
+      local meta = minetest.env:get_meta(pos)
+      local player = placer:get_player_name()
+      meta:set_string("owner", player)
+      meta:set_string("infotext", player)
     end,
   })
 
@@ -96,6 +101,11 @@ for color = 1, 2 do
       local player = placer:get_player_name()
       return is_owner(pos, player)
     end,
+    after_place_node = function(pos, placer)
+      local meta = minetest.env:get_meta(pos)
+      local player = placer:get_player_name()
+      meta:set_string("owner", player)
+    end,
   })
 
   --Knight
@@ -132,6 +142,11 @@ for color = 1, 2 do
       local player = placer:get_player_name()
       return is_owner(pos, player)
     end,
+    after_place_node = function(pos, placer)
+      local meta = minetest.env:get_meta(pos)
+      local player = placer:get_player_name()
+      meta:set_string("owner", player)
+    end,
   })
 
   --Bishop
@@ -167,6 +182,11 @@ for color = 1, 2 do
     can_dig = function(pos, placer)
       local player = placer:get_player_name()
       return is_owner(pos, player)
+    end,
+    after_place_node = function(pos, placer)
+      local meta = minetest.env:get_meta(pos)
+      local player = placer:get_player_name()
+      meta:set_string("owner", player)
     end,
   })
 
@@ -210,6 +230,11 @@ for color = 1, 2 do
       local player = placer:get_player_name()
       return is_owner(pos, player)
     end,
+    after_place_node = function(pos, placer)
+      local meta = minetest.env:get_meta(pos)
+      local player = placer:get_player_name()
+      meta:set_string("owner", player)
+    end,
   })
 
   --King
@@ -251,7 +276,6 @@ for color = 1, 2 do
     after_place_node = function(pos, placer)
       local meta = minetest.env:get_meta(pos)
       local player = placer:get_player_name()
-      print(player)
       meta:set_string("owner", player)
     end,
     on_punch = function(pos, node, puncher)
