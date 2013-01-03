@@ -14,6 +14,15 @@
 
 dofile(minetest.get_modpath("chess").."/pieces.lua")
 dofile(minetest.get_modpath("chess").."/rules.lua")
+dofile(minetest.get_modpath("chess").."/ownership.lua")
+
+local function is_owner(pos, name)
+  local owner = minetest.env:get_meta(pos):get_string("owner")
+  if owner == "" or owner == name then
+    return true
+  end
+    return false
+end
 
 local letters = {"a", "b", "c", "d", "e", "f", "g", "h"}
 
@@ -25,6 +34,10 @@ minetest.register_node("chess:spawn",{
     description = "Chess Board",
     tile_images = {"chess_border_spawn.png", "chess_board_black.png", "chess_board_black.png^chess_border_side.png"},
 	  groups = {tree=1,snappy=1,choppy=2,oddly_breakable_by_hand=1,not_in_creative_inventory=1},
+	  can_dig = function(pos, placer)
+      local player = placer:get_player_name()
+      return is_owner(pos, player)
+    end,
     after_dig_node = function(pos, node, digger)
         
         local size = 9
@@ -54,8 +67,13 @@ minetest.register_node("chess:spawn",{
         
     end,
     after_place_node = function(pos, placer)
-        --place chess board
+        --assign ownership to placer
+        local player = placer:get_player_name()
+        local meta = minetest.env:get_meta(pos)
+        meta:set_string("infotext", player .. "")
+        meta:set_string("owner", player)
         
+        --place chess board
         for i = size, 0, -1 do
             for ii = size, 0, -1 do
                 for iii = 1, 0, -1 do
@@ -73,7 +91,7 @@ minetest.register_node("chess:spawn",{
             end
         end
         
-        minetest.chat_send_all("Chess board has been placed, let the match begin!")
+        minetest.chat_send_all("Chess board has been placed! Choose your color by punching the king")
         for i = size, 0, -1 do
             for ii = size, 0, -1 do
                 --place chessboard
@@ -146,7 +164,7 @@ minetest.register_craft({
     output="chess:spawn",
     recipe = {
         {'default:wood','default:tree','default:wood'},
-        {'default:tree','default:mese','default:tree'},
+        {'default:tree','default:wood','default:tree'},
         {'default:wood','default:tree','default:wood'},
     }
 })
