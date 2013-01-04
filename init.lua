@@ -70,7 +70,8 @@ minetest.register_node("chess:spawn",{
         --assign ownership to placer
         local player = placer:get_player_name()
         local meta = minetest.env:get_meta(pos)
-        meta:set_string("infotext", player .. "")
+        
+        meta:set_string("infotext", "[Chess] " .. player .. " is owner")
         meta:set_string("owner", player)
         
         --place chess board
@@ -83,7 +84,7 @@ minetest.register_node("chess:spawn",{
                         local n = minetest.env:get_node(p)
                         
                         if(n.name ~= "air") then
-                            minetest.chat_send_all("Cannot place chess board")
+                            minetest.chat_send("[Chess] cannot place chess board")
                             return
                         end
                     end
@@ -91,7 +92,7 @@ minetest.register_node("chess:spawn",{
             end
         end
         
-        minetest.chat_send_all("Chess board has been placed! Choose your color by punching the king")
+        minetest.chat_send_all("[Chess] " .. player .. " placed chessboard, hit king to select color")
         for i = size, 0, -1 do
             for ii = size, 0, -1 do
                 --place chessboard

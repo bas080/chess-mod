@@ -287,23 +287,23 @@ for color = 1, 2 do
       local plo
       if (owner == "") then
         local meta = minetest.env:get_meta(pos)
-        meta:set_string("infotext", player .. "")
+        meta:set_string("infotext", "[Chess] "..player)
         meta:set_string("owner", player)
         if ( n.name == "chess:king_white" ) then
-          minetest.chat_send_all(player .. " selected white")
+          minetest.chat_send_all("[Chess] "..player .. " plays as WHITE")
           plo = {x=pos.x+3, y=pos.y, z=pos.z}
         else
-          minetest.chat_send_all(player .. " selected black")
+          minetest.chat_send_all("[Chess] "..player .. " plays as BLACK")
           plo = {x=pos.x+3, y=pos.y, z=pos.z-1}
         end
         for i = 0, 7, 1 do
             local pt = {x=plo.x-i, y=plo.y, z=plo.z}
             local p = {x=plo.x-i, y=plo.y, z=plo.z+1}
             local meta = minetest.env:get_meta(pt)
-            meta:set_string("infotext", player .. "")
+            meta:set_string("infotext", "[Chess] "..player)
             meta:set_string("owner", player)
             local meta = minetest.env:get_meta(p)
-            meta:set_string("infotext", player .. "")
+            meta:set_string("infotext", "[Chess] "..player)
             meta:set_string("owner", player)
         end
       end
