@@ -56,8 +56,8 @@ for color = 1, 2 do
     after_place_node = function(pos, placer)
       local meta = minetest.env:get_meta(pos)
       local player = placer:get_player_name()
+      meta:set_string("infotext", "[Chess] "..player)
       meta:set_string("owner", player)
-      meta:set_string("infotext", player)
     end,
   })
 
@@ -104,6 +104,7 @@ for color = 1, 2 do
     after_place_node = function(pos, placer)
       local meta = minetest.env:get_meta(pos)
       local player = placer:get_player_name()
+      meta:set_string("infotext", "[Chess] "..player)
       meta:set_string("owner", player)
     end,
   })
@@ -145,6 +146,7 @@ for color = 1, 2 do
     after_place_node = function(pos, placer)
       local meta = minetest.env:get_meta(pos)
       local player = placer:get_player_name()
+      meta:set_string("infotext", "[Chess] "..player)
       meta:set_string("owner", player)
     end,
   })
@@ -186,6 +188,7 @@ for color = 1, 2 do
     after_place_node = function(pos, placer)
       local meta = minetest.env:get_meta(pos)
       local player = placer:get_player_name()
+      meta:set_string("infotext", "[Chess] "..player)
       meta:set_string("owner", player)
     end,
   })
@@ -233,6 +236,7 @@ for color = 1, 2 do
     after_place_node = function(pos, placer)
       local meta = minetest.env:get_meta(pos)
       local player = placer:get_player_name()
+      meta:set_string("infotext", "[Chess] "..player)
       meta:set_string("owner", player)
     end,
   })
@@ -276,6 +280,7 @@ for color = 1, 2 do
     after_place_node = function(pos, placer)
       local meta = minetest.env:get_meta(pos)
       local player = placer:get_player_name()
+      meta:set_string("infotext", "[Chess] "..player)
       meta:set_string("owner", player)
     end,
     on_punch = function(pos, node, puncher)
@@ -297,14 +302,17 @@ for color = 1, 2 do
           plo = {x=pos.x+3, y=pos.y, z=pos.z-1}
         end
         for i = 0, 7, 1 do
-            local pt = {x=plo.x-i, y=plo.y, z=plo.z}
+            
             local p = {x=plo.x-i, y=plo.y, z=plo.z+1}
-            local meta = minetest.env:get_meta(pt)
-            meta:set_string("infotext", "[Chess] "..player)
-            meta:set_string("owner", player)
             local meta = minetest.env:get_meta(p)
             meta:set_string("infotext", "[Chess] "..player)
             meta:set_string("owner", player)
+            
+            local pt = {x=plo.x-i, y=plo.y, z=plo.z}
+            local meta = minetest.env:get_meta(pt)
+            meta:set_string("infotext", "[Chess] "..player)
+            meta:set_string("owner", player)
+            
         end
       end
     end,
