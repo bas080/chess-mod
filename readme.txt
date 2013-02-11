@@ -27,7 +27,7 @@ Changelog
 * Improved chess spawner with chess pieces
 
 0.1
-* InfinityProject made code layout
+* Rubenwardy made code layout
 * Chess spawner
 
 Licence
